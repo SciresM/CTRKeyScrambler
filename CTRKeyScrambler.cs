@@ -30,7 +30,7 @@ namespace CTR
             return RotateLeft(NormalKey, 87);
         }
                                                                            
-        private byte[] XOR(byte[] arr1, byte[] arr2)
+        private static byte[] XOR(byte[] arr1, byte[] arr2)
         {
             if (arr1.Length != arr2.Length)
                 throw new ArgumentException("Array Lengths must be equal.");
@@ -42,7 +42,7 @@ namespace CTR
             return xored;
         }
         
-        private BigInteger ToUnsignedBigInteger(byte[] data)
+        private static BigInteger ToUnsignedBigInteger(byte[] data)
         {
             if (BitConverter.IsLittleEndian)
                 return new BigInteger(data.Reverse().Concat(new byte[] { 0 }).ToArray());
@@ -50,7 +50,7 @@ namespace CTR
                 return new BigInteger(new byte[] { 0 }.Concat(data).ToArray());
         }
              
-        private byte[] RotateLeft(byte[] input, int shift)
+        private static byte[] RotateLeft(byte[] input, int shift)
         {
             int N = (input.Length * 8) - (shift % (input.Length * 8));
             List<int> bits = new List<int>();
@@ -74,7 +74,7 @@ namespace CTR
             return output;
         }
         
-        private byte[] RotateRight(byte[] input, int shift)
+        private static byte[] RotateRight(byte[] input, int shift)
         {
             int N = shift % (input.Length * 8);
             List<int> bits = new List<int>();
