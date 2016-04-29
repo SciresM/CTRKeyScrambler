@@ -22,10 +22,11 @@ namespace CTR
             byte[] NormalKey = BigInteger.Add(Key, C).ToByteArray();
             
             if (BitConverter.IsLittleEndian)
+            {
+                if (NormalKey.Length > 0x10)
+                    NormalKey = NormalKey.Take(0x10).ToArray();
                 Array.Reverse(NormalKey);
-
-            if (NormalKey.Length > 0x10)
-                NormalKey = NormalKey.Take(0x10).ToArray();
+            }
             
             return RotateLeft(NormalKey, 87);
         }
